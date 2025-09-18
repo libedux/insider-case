@@ -19,7 +19,6 @@ class MessageService implements IMessageService
 	public function sendMessage(Message $message): bool
 	{
 		try {
-
             if($message->status !== MessageStatus::Pending) {
                 Log::info('Message already sent to ' . $message->user?->phone_number);
                 return true;
@@ -30,6 +29,7 @@ class MessageService implements IMessageService
                 'to' => $message->user?->phone_number,
                 'content' => $message->content,
             ]);
+
 
             if ($response->successful()) {
                 Log::info('Message sent successfully to ' . $message->user?->phone_number);
@@ -50,7 +50,6 @@ class MessageService implements IMessageService
             }
             
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             Log::error('Failed to send message: ' . $th->getMessage());
             return false;
         }
