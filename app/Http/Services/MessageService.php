@@ -9,7 +9,7 @@ use App\Models\Message;
 use App\Support\Constants\CacheConstant;
 use App\Support\Enum\MessageStatus;
 use Illuminate\Support\Facades\Http;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 
 class MessageService implements IMessageService
@@ -50,6 +50,7 @@ class MessageService implements IMessageService
             }
             
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             Log::error('Failed to send message: ' . $th->getMessage());
             return false;
         }

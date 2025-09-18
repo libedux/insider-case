@@ -3,7 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Services\Contracts\ICacheService;
-use Cache;
+use Illuminate\Support\Facades\Cache;
 
 
 class RedisCacheService implements ICacheService
