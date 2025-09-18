@@ -19,18 +19,11 @@ class MessageController extends Controller
     public function index()
     {
         $this->messageService->sendMessage(Message::first());
-        $cacheData = $this->cacheService->get(CacheConstant::SENT_MESSAGES_CACHE_KEY);
-        
-        if (!empty($cacheData)) {
-            return response()->json([
-                'data' => $cacheData,
-            ]);
-        }
-
-        return response()->json([
-            'source' => 'database',
-            'data' => Message::all()->toArray(), 
-        ]);
+ 
+        // return response()->json([
+        //     'source' => 'database',
+        //     'data' => Message::all()->toArray(), 
+        // ]);
     }
 
 

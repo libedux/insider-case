@@ -23,4 +23,13 @@ class RedisCacheService implements ICacheService
         return Cache::forget($key);
     }
 
+    public function add(string $key, mixed $value, int $ttl): bool
+    {
+        $data = $this->get($key);
+        if (!empty($data)) {
+            $value = array_merge($data, $value);
+        }
+
+        return $this->put($key, $value, $ttl);
+    }
 }

@@ -12,4 +12,5 @@ interface ICacheService
 
     public function forget(string $key): bool;
 
+    public function add(string $key, mixed $value, int $ttl): bool;
 }

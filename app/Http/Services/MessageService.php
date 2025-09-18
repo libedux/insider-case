@@ -31,7 +31,6 @@ class MessageService implements IMessageService
                 'content' => $message->content,
             ]);
 
-
             if ($response->successful()) {
                 Log::info('Message sent successfully to ' . $message->user?->phone_number);
                 $this->messageRepository->update([
@@ -39,8 +38,7 @@ class MessageService implements IMessageService
                     'status' => MessageStatus::Sent
                 ]);
 
-                $this->cacheService->put(CacheConstant::SENT_MESSAGES_CACHE_KEY, Message::all()->toArray(), 300); 
-
+                $this->cacheService->add(CacheConstant::SENT_MESSAGES_CACHE_KEY, $response->body(), 300); 
                 return true;
             } else {
                 Log::error('Failed to send message. Response: ' . $response->body());
@@ -56,12 +54,4 @@ class MessageService implements IMessageService
             return false;
         }
 	}
-
-
-    public function getMessages() : array {
-        
-    }
-
-
-    
 }
